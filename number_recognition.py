@@ -1,8 +1,9 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
+import gzip
 
 def read_data(filename):
-    with open(filename) as input:
+    with gzip.open(filename) as input:
         s=[1]+[float(i) for i in input.readline().split()]
         X,Y=np.array([s[:-1]],dtype=np.float64),np.array([s[-1]],dtype=np.int64)
         Y=Y%10
@@ -25,7 +26,7 @@ def gradient_descent(X,Y,alpha,iter,function):
         
     return O
 
-X,Y=read_data('data.txt')
+X,Y=read_data('data.gz')
 X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=12)
 n=X_train[0].size; theta=np.zeros((n,10))
 
@@ -35,4 +36,4 @@ for i in range(10):
 
 prediction=np.argmax(X_test.dot(theta).T,axis=0)
 
-print('\nAccuracy:\n',np.mean(prediction == Y_test) * 100)
+print('Accuracy:\n',np.mean(prediction == Y_test) * 100)
