@@ -65,7 +65,7 @@ def gradient_descent(X,Y,alpha,lmbd,max_iter,*unit_numbers):
 
 RandomState(12)
 
-X,Y=read_data('data.txt')
+X,Y=read_data('data.gz')
 m=X.shape[0]; n=X.shape[1]
 Y=concatenate((Y.reshape(m,1),zeros((m,9))),axis=1)
 for i in range(m):
